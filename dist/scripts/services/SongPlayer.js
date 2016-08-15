@@ -4,9 +4,10 @@
 
         /*
         * @function currentAlbum
-        * @desc gets ablum from Fixtures
+        * @desc gets album from Fixtures
         */
         var currentAlbum = Fixtures.getAlbum();
+        SongPlayer.currentAlbum = currentAlbum;
 
         /*
         * @desc creating Buzz object variable for audio file
@@ -21,8 +22,7 @@
         */
         var setSong = function(song) {
             if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = false;
+                stopSong(SongPlayer.currentSong);
             }
 
             currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -44,6 +44,16 @@
         };
 
         /*
+        * @function stopSong
+        * @desc Stops current buzz object and sets song playing to null
+        * @param {Object} song
+        */
+        var stopSong = function(song) {
+            currentBuzzObject.stop();
+            song.playing = null;
+        };
+
+        /*
         * @function getSongIndex
         * @desc Returns index of song from current album
         * @param {Object} song
@@ -56,7 +66,7 @@
         * @desc Current audio file
         * @type {Object}
         */
-        SongPlayer.CurrentSong = null;
+        SongPlayer.currentSong = null;
 
         /*
         * @function SongPlayer.play
@@ -86,15 +96,14 @@
 
         /*
         * @function SongPlayer.previous
-        * @desc Sets current song index to previous song on ablum
+        * @desc Sets current song index to previous song on album
         */
         SongPlayer.previous = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
 
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(SongPlayer.currentSong);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
@@ -104,11 +113,19 @@
 
         /*
         * @function SongPlayer.next
-        * @desc Sets current song index to previous song on ablum
+        * @desc Sets current song index to previous song on album
         */
         SongPlayer.next = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
+
+            if (currentSongIndex >= currentAlbum.songs.length) {
+                stopSong(SongPlayer.currentSong);
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
         };
 
         return SongPlayer;
