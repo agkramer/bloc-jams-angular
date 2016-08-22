@@ -1,9 +1,10 @@
 (function() {
     function timecode() {
         return function(seconds) {
+            var seconds = Number.parseFloat(seconds);
 
             if (Number.isNaN(seconds)) {
-                return '-:--';
+                return '00:00';
             }
 
             return buzz.toTimer(seconds);
