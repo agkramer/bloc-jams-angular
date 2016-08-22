@@ -88,7 +88,7 @@
 
         /*
         * @function SongPlayer.play
-        * @desc Plays song
+        * @desc Plays a song
         * @param {Object} song
         */
         SongPlayer.play = function(song) {
@@ -167,7 +167,6 @@
                 currentBuzzObject.setVolume(volume);
             }
         };
-
 
         return SongPlayer;
     };
