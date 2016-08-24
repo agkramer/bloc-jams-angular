@@ -15,6 +15,7 @@
         */
         var currentBuzzObject = null;
 
+        var songMuted = null;
         /*
         * @function setSong
         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
@@ -165,6 +166,18 @@
         SongPlayer.setVolume = function(volume) {
             if (currentBuzzObject) {
                 currentBuzzObject.setVolume(volume);
+            }
+        };
+
+        /*
+        * @function muteVolume
+        * @desc toggles mute/unmute volume of current song
+        * @param {Object}
+        */
+        SongPlayer.muteVolume = function() {
+            if (currentBuzzObject) {
+                currentBuzzObject.toggleMute();
+                songMuted = currentBuzzObject.isMuted();
             }
         };
 
