@@ -3,6 +3,12 @@
         var SongPlayer = {};
 
         /*
+        * @function songMuted
+        * @desc returns true if song is muted, else false
+        */
+        SongPlayer.songMuted = null;
+
+        /*
         * @function currentAlbum
         * @desc gets album from Fixtures
         */
@@ -15,7 +21,7 @@
         */
         var currentBuzzObject = null;
 
-        var songMuted = null;
+
         /*
         * @function setSong
         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
@@ -34,6 +40,12 @@
             currentBuzzObject.bind('timeupdate', function() {
                  $rootScope.$apply(function() {
                      SongPlayer.currentTime = currentBuzzObject.getTime();
+                 });
+             });
+
+             currentBuzzObject.bind('ended', function() {
+                 $rootScope.$apply(function() {
+                     SongPlayer.next();
                  });
              });
 
@@ -177,7 +189,7 @@
         SongPlayer.muteVolume = function() {
             if (currentBuzzObject) {
                 currentBuzzObject.toggleMute();
-                songMuted = currentBuzzObject.isMuted();
+                SongPlayer.songMuted = currentBuzzObject.isMuted();
             }
         };
 
