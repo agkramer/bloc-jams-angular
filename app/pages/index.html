@@ -19,14 +19,34 @@
              <img src="assets/images/bloc_jams_logo.png" alt="bloc jams logo">
          </a>
          <div class="links-container">
+             <p class="navbar-link">Sign Up</p>
+             <p class="navbar-link">|</p>
              <a ui-sref="collection" class="navbar-link">collection</a>
          </div>
      </nav>
 
     <ui-view></ui-view>
 
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyASSigOF3koPxF_lrlHnydseXgk_Bi3ln0",
+            authDomain: "bloc-jams-angular-8b4b5.firebaseapp.com",
+            databaseURL: "https://bloc-jams-angular-8b4b5.firebaseio.com",
+            storageBucket: "bloc-jams-angular-8b4b5.appspot.com",
+        };
+
+        firebase.initializeApp(config);
+    </script>
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
     <script src="/scripts/app.js"></script>

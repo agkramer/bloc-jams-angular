@@ -21,7 +21,6 @@
         */
         var currentBuzzObject = null;
 
-
         /*
         * @function setSong
         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
